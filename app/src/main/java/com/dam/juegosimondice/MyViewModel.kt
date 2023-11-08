@@ -19,25 +19,18 @@ class MyViewModel() : ViewModel() {
     //para que sea mas facil la etiqueta del log
     private val TAG_LOG: String = "Mensaje ViewModel"
 
-    //esta va a ser nuestra lista para la secuencia random
-    //usamos mutable, ya que la queremos modificar y observar cuando cambia
-    var _numbers = mutableStateOf(0)
-
-    //crear una lista mutable
-    val numbers= mutableStateListOf<Int>()
-
     // Variable para almacenar el resultado del juego
     private val _gameResult = mutableStateOf(false)
     val gameResult: State<Boolean> = _gameResult
 
     // Variable para almacenar la secuencia
-    private val _sequence = mutableStateOf(emptyList<SimonColor>())
-    val sequence: State<List<SimonColor>> = _sequence
+    val sequence = mutableStateListOf<SimonColor>()
 
-    // Dos maneras diferentes de definir un estado
-    // con el = necesitamos utilizar value
+    // Variable para almacenar la secuencia ingresada por el jugador
+    private val _playerSequence = mutableStateOf(mutableListOf<SimonColor>())
+    val playerSequence: State<List<SimonColor>> = _playerSequence
+
     var counter=mutableStateOf(0)
-    var name =mutableStateOf("")
 
     //inicializamos variables cuando instanciamos, éste es el constructor de la clase
     init {
@@ -45,32 +38,6 @@ class MyViewModel() : ViewModel() {
         Log.d(TAG_LOG, "Inicializamos ViewModel")
     }
 
-    /**
-     * Crear entero random
-     */
-    fun crearRandom() {
-        val randomNumber=(0..3).random()
-        numbers.add(randomNumber)
-        Log.d(TAG_LOG,"Creamos random $randomNumber")
-
-        //Imprime la lista completa
-        for(numero in numbers){
-            Log.d(TAG_LOG,"Números aleatorio: $numero")
-        }
-        /*_numbers.value = (0..10).random()
-        Log.d(TAG_LOG, "Creamos random ${_numbers.value}")*/
-    }
-
-    /**
-     * Crear entero random
-     */
-    fun getNumero(): Int {
-        return _numbers.value
-    }
-
-    fun getListaRandom(): List<Int> {
-        return numbers.toList()
-    }
     /**
      * Contador de clic
      */
@@ -85,10 +52,12 @@ class MyViewModel() : ViewModel() {
         return counter.value
     }
 
-    /**
-     * Obtener texto
-     */
-    fun getTexto():String{
-        return name.value
+    // Función para generar una secuencia aleatoria
+    fun generarSecuencia() {
+        sequence.clear()
+        for (i in 1..10) {  // Genera una secuencia de 10 elementos
+            val randomColor = SimonColor.values().random()
+            sequence.add(randomColor)
+        }
     }
 }

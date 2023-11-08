@@ -17,7 +17,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //inicializamos ViewModel
-        val miViewModel:MyViewModel=MyViewModel()
+        val miViewModel=MyViewModel()
         setContent {
             JuegoSimonDiceTheme {
                 // A surface container using the 'background' color from the theme
@@ -32,22 +32,6 @@ class MainActivity : ComponentActivity() {
             }
         }
         Log.d(TAG, "onCreate")
-
-        /*calcular(a = 3, b = 5, fun() {
-            //val suma = numero1 + numero2
-            //Log.d("calcular", suma.toString())
-        })
-
-        /*
-        Esto es una función que ya tiene parámetros predefinidos
-        y una termina con función vacía como parámetro
-
-        fun calcular(a: Int = 0, b: Int = 0, operacion: () -> Unit) {
-        operacion()
-         */
-        calcular {
-            Log.d("calcular", "yo no hago nada, solo LOG")
-        }*/
     }
 
     override fun onStart() {
@@ -74,16 +58,4 @@ class MainActivity : ComponentActivity() {
         super.onDestroy()
         Log.e(TAG, "onDestroy")
     }
-
-    /*fun calcular(a: Int = 0, b: Int = 0, operacion: () -> Unit) {
-        //val operacion = a + b
-        //Log.d("calcular", operacion.toString())
-        //operacion(a, b)
-        operacion()
-    }*/
 }
-
-// Declara tu función para generar números aleatorios
-/*fun generarNumeroAleatorio(): Int {
-    return (0..10).random()
-}*/
