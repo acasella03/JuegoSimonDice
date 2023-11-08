@@ -18,10 +18,23 @@ A continuación, se presenta un diagrama de flujo que muestra cómo funciona el 
 
 ```mermaid
 graph TD;
-Inicio-->Simon muestra una secuencia
-Simon muestra una secuencia-->Espera entrada del jugador
-Espera entrada del jugador--Respuesta correcta-->Aumenta la longitud de la secuencia
-Espera entrada del jugador--Respuesta incorrecta-->Fin del juego
-Fin del juego-->Mostrar puntuación
-Mostrar puntuación-->Fin
+
+Inicio-->Turno_Inicia_color_random
+Turno_Inicia_color_random-->Genera_color_random
+Genera_color_random-->Muestra_el_o_los_colores_random
+Muestra_el_o_los_colores_random-->Correcto-->no
+Correcto-->si-->Genera_color_random
+```
+
+## Diagrama de Estado
+
+```mermaid
+graph TD;
+
+Start-->Sequence
+Sequence-->Wait
+Wait-->Input
+Input-->Checking
+Checking-->GameOver
+Checking-->Sequence
 ```
